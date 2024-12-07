@@ -22,7 +22,7 @@ func CreateUser(c *gin.Context) {
 		Balance float64 `json:"balance"`
 	}
 
-	//привязка данных из тела запроса к переменной input
+	//Привязка данных из тела запроса к переменной input
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
