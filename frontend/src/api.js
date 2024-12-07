@@ -2,11 +2,29 @@ import axios from "axios";
 
 const API_URL = "http://localhost:8081";
 
-// Получение всех пользователей
-export const fetchUsers = () => axios.get(`${API_URL}/users`);
+// api.js
 
-// Создание нового пользователя
-export const createUser = () => axios.post(`${API_URL}/users`);
+export const fetchUsers = async () => {
+    const response = await fetch("http://localhost:8081/users");
+    if (!response.ok) {
+        throw new Error("Error fetching users");
+    }
+    return await response.json();
+};
+
+export const createUser = async (user) => {
+    const response = await fetch("http://localhost:8081/users", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+    });
+    if (!response.ok) {
+        throw new Error("Error creating user");
+    }
+    return await response.json();
+};
 
 // Получение баланса пользователя
 export const getUserBalance = (userId) =>
